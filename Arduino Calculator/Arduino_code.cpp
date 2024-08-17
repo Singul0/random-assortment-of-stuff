@@ -1,6 +1,8 @@
 /*
  * Arduino Keypad calculator for a school project.
  * main code is from circuit digest, adjusted as needed. + indonesian translated comments
+ * Tons of things to clean up
+ * TODO: Make it so that the result is treated as the first input.
  */
 
 
@@ -9,7 +11,7 @@
 
 const byte ROWS = 4; // Four rows
 
-const byte COLS = 4; // Three columns
+const byte COLS = 4; // Four columns
 
 // Define the Keymap
 
@@ -48,11 +50,11 @@ void setup() {
 
   lcd.begin(16, 2); //We are using a 16*2 LCD display
 
-  lcd.print("DIY Calculator"); //Display a intro message
+  lcd.print("Arduino Calculator"); //Display a intro message
 
   lcd.setCursor(0, 1);   // set the cursor to column 0, line 1
 
-  lcd.print("-CircuitDigest"); //Display a intro message 
+  lcd.print("P5 XI-1 Kelompok 1"); //Display a intro message 
 
    delay(2000); //Wait for display to show info
 
@@ -282,7 +284,7 @@ void DetectButtons()
 
      if (key == 'D')
 
-    {Serial.println ("Devesion"); action = '/';}  
+    {Serial.println ("Division"); action = '/';}  
 
     delay(100);
 
