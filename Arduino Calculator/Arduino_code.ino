@@ -1,8 +1,6 @@
 /*
  * Arduino Keypad calculator for a school project.
- * Main code is from Elktros, adjusted as needed. + indonesian translated comments
- * Tons of things to clean up
- * TODO: Make it so that the result is treated as the first input.
+ * Main code is from Elktros, adjusted as needed. + indonesian  comments
  */
 
 #include <LiquidCrystal.h>
@@ -24,25 +22,28 @@ byte colPins[COLS] = {9, 8, 7, 6};
 Keypad myKeypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 
-boolean presentValue = false;
+boolean presentValue = false; // variable ini menyatakan jika num1 sudah diberi op (operator). digunakan agar menyatakan input adalah untuk num1 atau num2
 boolean next = false;
 boolean final = false;
-String num1, num2;
-int answer;
-char op;
+String num1, num2; // num1 (angka yang dioperasikan dengan num2) num2 (angka yang dioperasikan dengan num2)
+int answer; //hasil operasi aritmatika
+char op; //operator yang digunakan, perkalian/pertambahan/pembagian/pengurangan.
+
+void intro_display_text(string text_above, string text_below)
+{
+  lcd.setCursor(0, 0);
+  lcd.print(text_above);
+  lcd.setCursor(0, 1);
+  lcd.print(text_below);
+  delay(5000);
+}
+
 
 void setup()
 {
   lcd.begin(16,2);
-  lcd.setCursor(0,0);
-  lcd.print("P5 Kelompok 1 XI-1 ");
-  lcd.setCursor(0,1);
-  lcd.print("    Kalkulator Berdasarkan    ");
-  delay(5000);
-  lcd.setCursor(0,0);
-  lcd.print(" Berdasarkan  ");
-  lcd.setCursor(0,1);
-  lcd.print("  Arduino"    );
+  intro_display_text(" P5 Kelompok 1 XI-1 ", "    Projek Kalkulator    ");
+  intro_display_text(" Berdasarkan  ", " Arduino ");
   delay(5000);
   lcd.clear();
 }
@@ -52,11 +53,11 @@ void loop(){
 
   if (key != NO_KEY && (key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='0'))
   {
-    if (presentValue != true)
+    if (presentValue != true) //Apakah operator sudah dinyatakan? jika sudah num2, jika tidak num1
     {
       num1 = num1 + key;
       int numLength = num1.length();
-      lcd.setCursor(15 - numLength, 0); //to adjust one whitespace for operator
+      lcd.setCursor(15 - numLength, 0); //untuk memberikan satu whitespace buat operator
       lcd.print(num1);
     }
     else 
@@ -69,7 +70,7 @@ void loop(){
     }
   }
 
-  else if (presentValue == false && key != NO_KEY && (key == '/' || key == '*' || key == '-' || key == '+'))
+  else if (presentValue == false && key != NO_KEY && (key == '/' || key == '*' || key == '-' || key == '+')) //Pemilihan operator
   {
     if (presentValue == false)
     {
@@ -80,7 +81,7 @@ void loop(){
     }
   }
 
-  else if (final == true && key != NO_KEY && key == '='){
+  else if (final == true && key != NO_KEY && key == '='){ 
     if (op == '+'){
       answer = num1.toInt() + num2.toInt();
     }
@@ -99,7 +100,7 @@ void loop(){
       lcd.print(answer);
       lcd.noAutoscroll();
   }
-  else if (key != NO_KEY && key == 'C'){
+  else if (key != NO_KEY && key == 'C'){ //reset menjadi semula
     lcd.clear();
     presentValue = false;
     final = false;
