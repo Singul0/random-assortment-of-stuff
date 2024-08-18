@@ -23,7 +23,6 @@ Keypad myKeypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 
 boolean presentValue = false; // variable ini menyatakan jika num1 sudah diberi op (operator). digunakan agar menyatakan input adalah untuk num1 atau num2
-boolean next = false;
 boolean final = false;
 String calculator_mode = "calculator"; //Mode kalkulator atau game (ide game pending)? TODO: IMPLEMENT GAME AND MODE CHANGES
 String num1, num2; // num1 (angka yang dioperasikan dengan num2) num2 (angka yang dioperasikan dengan num2)
@@ -41,7 +40,7 @@ void intro_display_text(string text_above, string text_below)
 }
 
 
-void calculator_actual_mode(char key)
+void calculator_actual_mode(char key) //fungsi buat kerjanya kalkulator
   if (key != NO_KEY && (key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='0'))
   {
     if (presentValue != true) //Apakah operator sudah dinyatakan? jika sudah num2, jika tidak num1
