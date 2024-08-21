@@ -101,6 +101,9 @@ void calculator_actual_mode(char key) //fungsi buat kerjanya kalkulator
     clear_or_reset_counter = clear_or_reset_counter + 1 //sebenernya bisa si, cuman clear_or_reset_counter++ tapi susah di baca imo -_-
   }
 
+void calculator_actual_mode(char key) //fungsi buat game C&B
+
+
 void setup()
 {
   lcd.begin(16,2);
@@ -116,5 +119,8 @@ void loop()
   if(calculator_mode == "calculator")
   {
     calculator_actual_mode(key)
+  }
+  else{
+    cows_and_bulls_mode(key)
   }
 }
