@@ -30,7 +30,7 @@ int clear_or_reset_counter = 0; //seberapa banyaknya kalkulator sudah direset (b
 int answer; //hasil operasi aritmatika
 char op; //operator yang digunakan, perkalian/pertambahan/pembagian/pengurangan.
 
-void intro_display_text(string text_above, string text_below)
+void intro_display_text(String text_above, String text_below)
 {
   lcd.setCursor(0, 0);
   lcd.print(text_above);
@@ -40,7 +40,8 @@ void intro_display_text(string text_above, string text_below)
 }
 
 
-void calculator_actual_mode(char key) //fungsi buat kerjanya kalkulator
+void calculator_actual_mode(char key)
+{ //fungsi buat kerjanya kalkulator
   if (key != NO_KEY && (key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='0'))
   {
     if (presentValue != true) //Apakah operator sudah dinyatakan? jika sudah num2, jika tidak num1
@@ -98,10 +99,9 @@ void calculator_actual_mode(char key) //fungsi buat kerjanya kalkulator
     num2 = "";
     answer = 0;
     op = ' ';
-    clear_or_reset_counter = clear_or_reset_counter + 1 //sebenernya bisa si, cuman clear_or_reset_counter++ tapi susah di baca imo -_-
+    clear_or_reset_counter = clear_or_reset_counter + 1; //sebenernya bisa si, cuman clear_or_reset_counter++ tapi susah di baca imo -_-
   }
-
-void calculator_actual_mode(char key) //fungsi buat game C&B
+}
 
 
 void setup()
@@ -118,9 +118,9 @@ void loop()
   char key = myKeypad.getKey();
   if(calculator_mode == "calculator")
   {
-    calculator_actual_mode(key)
+    calculator_actual_mode(key);
   }
   else{
-    cows_and_bulls_mode(key)
+    calculator_actual_mode(key); //TODO: FUNCTION FOR COWS AND BULLS GAMEMODE
   }
 }
